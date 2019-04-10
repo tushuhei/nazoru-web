@@ -74,6 +74,17 @@ class DemoController {
     this.startTime_ = null;
     this.state_ = States.WAITING;
     document.addEventListener('keydown', this.onKeydown_.bind(this), false);
+    this.checkToRefresh_();
+  }
+
+  checkToRefresh_() {
+    if (this.startTime_) {
+      let currentTime = new Date().getTime() - this.startTime_;
+      if (currentTime > 60000) {
+        location.reload();
+      }
+    }
+    setTimeout(this.checkToRefresh_.bind(this), 2000);
   }
 
   onKeydown_(e) {
