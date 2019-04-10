@@ -114,6 +114,11 @@ class DemoController {
         this.inputViewElement_.textContent += result[0]['character'];
         this.state_ = States.COMPLETED;
         this.keydowns_.clear();
+        if (window['gtag']) {
+          window['gtag']('event', 'input', {
+            'event_category' : 'kiosk',
+          });
+        }
       });
     }
   }

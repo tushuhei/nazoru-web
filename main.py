@@ -2,12 +2,13 @@
 from flask import Flask, render_template, jsonify, request
 from nazoru import get_default_graph_path
 from nazoru.core import NazoruPredictor
+import config
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-  return render_template('index.html')
+  return render_template('index.html', config=config)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -17,7 +18,10 @@ def predict():
   predictor = NazoruPredictor(graph)
   result = predictor.predict_top_n(data, 5)
   result = {
-    'result':[{'character': row[0], 'probability': float(row[2])} for row in result]
+    'result':[{
+        'character': row[0],
+        'probability': float(row[2]),
+    } for row in result]
   }
   return jsonify(result)
 

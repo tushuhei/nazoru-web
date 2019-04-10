@@ -4,6 +4,20 @@
     <meta charset="utf-8">
     <title>Gboard Physical Handwriting Input</title>
     <link rel="stylesheet" href="/static/css/main.css">
+    {% if config.ga_tracking_id %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{config.ga_tracking_id}}"></script>
+      <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', '{{config.ga_tracking_id}}', {
+	  'send_page_view': false,
+	});
+	gtag('event', 'load', {
+	  'event_category' : 'kiosk',
+	});
+      </script>
+    {% endif %}
   </head>
   <body>
     <header class="header">
