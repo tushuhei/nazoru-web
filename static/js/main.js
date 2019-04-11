@@ -1,5 +1,8 @@
 /** @const {!Array<string>} */
-const META_KEYS = ['Meta', 'Shift', 'Alt', 'Control', 'Tab', 'Dead', 'Enter'];
+const KEYS_TO_IGNORE = [
+  'Meta', 'Shift', 'Alt', 'Control', 'Tab', 'Dead', 'Enter', 'CapsLock', '`',
+  'Escape', 'Delete',
+];
 
 /** @enum {string} */
 const States = {
@@ -98,7 +101,7 @@ class DemoController {
   }
 
   onKeydown_(e) {
-    if (META_KEYS.indexOf(e.key) > -1) return;
+    if (KEYS_TO_IGNORE.indexOf(e.key) > -1) return;
     if (e.key == 'Backspace') {
       this.backspace_();
       return;
@@ -131,14 +134,19 @@ class DemoController {
         body: JSON.stringify(this.keydowns_.get()),
       }).then(res => res.json())
       .then((response) => {
-        let result = response['result'];
-        this.inputViewElement_.textContent += result[0]['character'];
-        this.demoElement_.dataset.state = States.COMPLETED;
-        this.keydowns_.clear();
-        if (window['gtag']) {
-          window['gtag']('event', 'input', {
-            'event_category' : 'kiosk',
-          });
+        if (response['status'] != 'ok') {
+          this.demoElement_.dataset.state = States.WAITING;
+          this.keydowns_.clear();
+        } else {
+          let result = response['result'];
+          this.inputViewElement_.textContent += result[0]['character'];
+          this.demoElement_.dataset.state = States.COMPLETED;
+          this.keydowns_.clear();
+          if (window['gtag']) {
+            window['gtag']('event', 'input', {
+              'event_category' : 'kiosk',
+            });
+          }
         }
       });
     }

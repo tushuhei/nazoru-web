@@ -16,14 +16,18 @@ def predict():
   data = [(d['key'], d['time']) for d in data]
   graph = get_default_graph_path()
   predictor = NazoruPredictor(graph)
-  result = predictor.predict_top_n(data, 5)
-  result = {
-    'result':[{
-        'character': row[0],
-        'probability': float(row[2]),
-    } for row in result]
-  }
-  return jsonify(result)
+  try:
+    result = predictor.predict_top_n(data, 5)
+    result = {
+      'result': [{
+          'character': row[0],
+          'probability': float(row[2]),
+      } for row in result],
+      'status': 'ok',
+    }
+    return jsonify(result)
+  except IndexError:
+    return jsonify({'status': 'ng'})
 
 if __name__ == '__main__':
-  app.run(host='127.0.0.1', port=8080, debug=True)
+  app.run(host='127.0.0.1', port=8080, debug=False)
