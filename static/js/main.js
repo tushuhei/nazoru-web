@@ -69,10 +69,11 @@ class Keydowns {
 class DemoController {
   constructor() {
     let keydownViewElement = document.querySelector('.keydowns');
+    this.demoElement_ = document.querySelector('.demo');
     this.inputViewElement_ = document.querySelector('.input');
     this.keydowns_ = new Keydowns(keydownViewElement);
     this.startTime_ = null;
-    this.state_ = States.WAITING;
+    this.demoElement_.dataset.state = States.WAITING;
     document.addEventListener('keydown', this.onKeydown_.bind(this), false);
     this.checkToRefresh_();
   }
@@ -101,7 +102,7 @@ class DemoController {
   }
 
   startRecording_() {
-    this.state_ = States.LISTENING;
+    this.demoElement_.dataset.state = States.LISTENING;
     this.startTime_ = new Date().getTime();
     this.intervalId_ = window.setInterval(
       this.checksToStopRecording_.bind(this), 100);
@@ -110,7 +111,7 @@ class DemoController {
   stopRecording_() {
     window.clearInterval(this.intervalId_);
     if (this.keydowns_.getLength() < 3) {
-      this.state_ = States.WAITING;
+      this.demoElement_.dataset.state = States.WAITING;
       this.keydowns_.clear();
     } else {
       fetch('/predict', {
@@ -123,7 +124,7 @@ class DemoController {
       .then((response) => {
         let result = response['result'];
         this.inputViewElement_.textContent += result[0]['character'];
-        this.state_ = States.COMPLETED;
+        this.demoElement_.dataset.state = States.COMPLETED;
         this.keydowns_.clear();
         if (window['gtag']) {
           window['gtag']('event', 'input', {

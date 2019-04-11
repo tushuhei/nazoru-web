@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Gboard Physical Handwriting Input</title>
+    <title>Gboard 物理手書きバージョン</title>
     <link rel="stylesheet" href="/static/css/main.css">
     {% if config.ga_tracking_id %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{config.ga_tracking_id}}"></script>
@@ -18,11 +18,32 @@
     <header class="header">
       <h1>Gboard 物理手書きバージョン</h1>
     </header>
-    <div class="container">
-      <span class="input"></span>
-      <span class="keydowns"></span>
-      <span class="cursor"></span>
-    </div>
+    <main class="demo">
+      <div class="container">
+        <span class="input"></span>
+        <span class="keydowns"></span>
+        <span class="cursor"></span>
+      </div>
+      <div class="demo__instruction">
+	<div class="demo__instruction-container">
+	  <div class="demo__instruction-image">
+	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="demo__instruction-keyboard">
+	      <path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z"/>
+	      <path d="M0 0h24v24H0zm0 0h24v24H0z" fill="none"/>
+	    </svg>
+	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 19" class="demo__instruction-hand">
+	      <path class="demo__instruction-hand-fill" d="M14.79,10.37,10.25,8.11A1.37,1.37,0,0,0,9.71,8H9V2A1.5,1.5,0,1,0,6,2V12.74L2.52,12l-.23,0a1.14,1.14,0,0,0-.8.33l-.79.8,4.94,4.94a1.51,1.51,0,0,0,1.06.44h6.79a1.47,1.47,0,0,0,1.45-1.28L15.69,12v-.2A1.48,1.48,0,0,0,14.79,10.37Z"/>
+	      <path class="demo__instruction-hand-stroke" d="M14.79,10.37,15,9.92,10.46,7.65h0a2,2,0,0,0-.74-.15H9.45V2a2,2,0,1,0-4,0V12.12l-2.84-.59-.26,0H2.29A1.62,1.62,0,0,0,1.14,12h0L0,13.12l5.29,5.29h0A2,2,0,0,0,6.7,19h6.79a2,2,0,0,0,1.94-1.71h0L16.18,12l0-.21v-.05A2,2,0,0,0,15,9.91l-.2.46L15,9.92l-.23.45-.19.46a1,1,0,0,1,.6.92h.5l-.49-.05,0,.19-.75,5.26h0a.94.94,0,0,1-.95.85H6.7a1,1,0,0,1-.7-.29H6L1.41,13.12l.44-.45h0a.63.63,0,0,1,.44-.18V12l-.07.5.22,0,4,.85V2a1,1,0,0,1,1-1,1,1,0,0,1,1,1V8.5H9.71a.84.84,0,0,1,.35.07l.19-.46L10,8.56l4.56,2.27h0Z"/>
+	    </svg>
+	  </div>
+	  <p class="demo__instruction-sentence">
+	    キーを押し込むようにして、<br>
+	    キーボードの上に文字を書いてください。<br>
+	    ひらがなと英数字を入力できます。
+	  </p>
+	</div>
+      </div>
+    </main>
     <script src="/static/js/main.js"></script>
   </body>
 </html>
