@@ -67,7 +67,7 @@ body {
   animation-name: spiral;
   left: calc(50% - 40px);
   position: absolute;
-  top: 60px;
+  top: 80px;
   width: 70px;
 }
 
@@ -81,6 +81,8 @@ body {
 
 .demo__instruction-sentence {
   font-size: 22px;
+  line-height: 1.6em;
+  margin-top: 32px;
 }
 
 .container {
@@ -104,7 +106,7 @@ body {
 }
 
 .keydowns {
-  color: #80868b;
+  color: #9aa0a6;
 }
 
 .cursor {

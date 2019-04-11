@@ -8,8 +8,17 @@ const States = {
   COMPLETED: 'completed',
 };
 
-/** const {number} */
+/**
+ * Time to wait before stopping keydown listening in milliseconds.
+ * @const {number}
+ */
 const WAIT_TIME = 500;
+
+/**
+ * Time to refresh the screen in milliseconds.
+ * @const {number}
+ */
+const TIME_TO_REFRESH = 30000;
 
 /**
  * A Keydown class.
@@ -81,7 +90,7 @@ class DemoController {
   checkToRefresh_() {
     if (this.startTime_) {
       let currentTime = new Date().getTime() - this.startTime_;
-      if (currentTime > 60000) {
+      if (currentTime > TIME_TO_REFRESH) {
         location.reload();
       }
     }
